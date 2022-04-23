@@ -1,7 +1,11 @@
-const connection = require('./config/connection');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+const connection = require('./config/connection');
 
+connection.connect((err) => {
+    if (err) throw err;
+    listOptions();
+})
 
 //prompts
 
@@ -22,6 +26,7 @@ const options = [
     }
 ]
 
+function listOptions() {
 inquirer
     .prompt(options)
     .then((answers) => {
@@ -46,7 +51,7 @@ inquirer
 
         } else if (answers.options === 'update an employee role') {
             console.log('update emp');
-            
+
         }
 
     })
@@ -59,6 +64,8 @@ inquirer
           console.log('error 2');
         }
       });
+
+    };
 
  //function for viewing all departments
 
