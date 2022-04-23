@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 const connection = require('./config/connection');
 
+//connect to database
 connection.connect((err) => {
     if (err) throw err;
     listOptions();
@@ -26,19 +27,22 @@ const options = [
     }
 ]
 
+//run prompts 
 function listOptions() {
 inquirer
     .prompt(options)
     .then((answers) => {
-        console.log(answers.options);
         if (answers.options === 'view all roles') {
-            console.log('view');
+            // console.log('view');
+            viewRol();
 
         } else if (answers.options === 'view all departments') {
-            console.log('view dep');
+            // console.log('view dep');
+            viewDep();
 
         } else if (answers.options === 'view all employees') {
-            console.log('view emp');
+            // console.log('view emp');
+            viewEmp();
 
         } else if (answers.options === 'add a department') {
             console.log('add dep');
@@ -68,15 +72,40 @@ inquirer
     };
 
  //function for viewing all departments
+ function viewDep() {
+     var depQuery = 'SELECT * FROM department';
+     connection.query(depQuery, (err, res) => {
+         if (err) throw err;
+         console.table(res);
+         listOptions();
+     });
+ };
 
  //function for viewing all roles
+ function viewRol() {
+    var rolQuery = 'SELECT * FROM role';
+    connection.query(rolQuery, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        listOptions();
+    });
+};
 
  //function for viewing all employees
+ function viewEmp() {
+    var empQuery = 'SELECT * FROM employee';
+    connection.query(empQuery, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        listOptions();
+    });
+};
 
  //function for adding a department
+
 
  //function for adding a role
 
  //function for adding an employee
 
- //function for updating an employee
+ //function for updating an employee role

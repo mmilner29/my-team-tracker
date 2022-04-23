@@ -10,7 +10,7 @@ CREATE TABLE role (
     department_id INTEGER
 );
 
-CREATE TABLE employee(
+CREATE TABLE employee (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
