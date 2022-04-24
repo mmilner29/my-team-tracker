@@ -1,6 +1,7 @@
 // get the client
 const mysql = require('mysql2');
 
+//secure my password
 require('dotenv').config()
 
 // create the connection to database

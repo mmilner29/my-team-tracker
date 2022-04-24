@@ -184,6 +184,7 @@ function createDep() {
 
             var depId = `SELECT id FROM department WHERE department_name = '${answers.department}'`;
 
+            //mysql -- use this format for returning an array of arrays rather than array of objects
             connection.query({ sql: depId, rowsAsArray: true }, (err, results, fields) => {
                 if (err) throw err;
 
@@ -233,6 +234,7 @@ function createDep() {
         if (err) throw err;
         let empArray = [];
 
+        //push each employee first and last name together as a string in an array--joins by a space for nicer display
         for (let i = 0; i < res.length; i++) {
             empArray.push(res[i].slice(1,3).join(' '));
         }
@@ -252,6 +254,7 @@ function createDep() {
             }
         ])
         .then((answer) => {
+            //use temp table to store a temporary result set, allowing me to select the id from employee where the name matches
             connection.query( 
             `UPDATE employee
             SET role_id = (SELECT id FROM role WHERE title = '${answer.role}')
